@@ -10,6 +10,9 @@
   "repository": "https://github.com/meetfranz/franz.git",
   "private": true,
   "scripts": {
+    "setup": "docker build -t franz-build-env .",
+    "hold_postsetup": "docker run --rm -it -v %cd%:/project npm run rebuild && npx lerna bootstrap",
+    "env": "docker run --rm -it -v %cd%:/project franz-build-env bash",
     "prestart": "npm run rebuild",
     "start": "electron ./build",
     "start:local": "cross-env LOCAL_API=1 npm start",
